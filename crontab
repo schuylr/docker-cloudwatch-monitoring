@@ -1,0 +1,1 @@
+* * * * * root /bin/bash -l -c '/aws-scripts-mon/mon-put-instance-data.pl --mem-util --from-cron --aws-secret-key=$AWS_SECRET_KEY --aws-access-key-id=$AWS_ACCESS_KEY_ID' >> /var/log/cloudwatch.log 2>&1

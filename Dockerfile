@@ -1,5 +1,5 @@
-FROM ubuntu
-MAINTAINER https://github.com/ariabov
+FROM phusion/baseimage
+MAINTAINER schuyler@jewlr.com
 
 # Install monitoring scripts
 
@@ -13,16 +13,16 @@ RUN wget http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringSc
 
 WORKDIR aws-scripts-mon
 
-COPY awscreds.template awscreds.template
+# We are making this on the fly
+# COPY awscreds.template awscreds.template
 
 # Setup cron
 
 ADD crontab /etc/crontab
-RUN crontab /etc/crontab
 
 # Log file for debugging
 
-RUN touch /var/log/cron.log
+RUN touch /var/log/cron.log && touch /var/log/cloudwatch.log
 RUN chmod 0644 /var/log/cron.log
 
-ENTRYPOINT cron -f
+CMD touch /etc/crontab && /sbin/my_init
